@@ -10,6 +10,7 @@ import java.sql.SQLException;
  */
 public interface IUserDao {
     public void addUser(String login, String password) throws SQLException;
-    public User findUser(int userId);
+    public User findUserById(int userId) throws SQLException;
+    public User findUserByLogin(String login) throws SQLException;
     public User[] findAll();
 }

@@ -13,11 +13,11 @@ import java.util.Map;
  * User: Stanislav.Pereverziev
  * Date: 10/5/13
  */
-public class ControllerHelper {
-    private static ControllerHelper instance = new ControllerHelper();
+public class ActionFactory {
+    private static ActionFactory instance = new ActionFactory();
     private Map<String, Action> actions = new HashMap<String, Action>();
 
-    public ControllerHelper() {
+    public ActionFactory() {
         actions.put("login", new LoginAction());
         actions.put("logout", new LogoutAction());
         actions.put("default", new DefaultAction());
@@ -31,7 +31,7 @@ public class ControllerHelper {
         return action;
     }
 
-    public static ControllerHelper getInstance() {
+    public static ActionFactory getInstance() {
         return instance;
     }
 }

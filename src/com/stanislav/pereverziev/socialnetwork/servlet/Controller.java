@@ -14,7 +14,7 @@ import java.io.IOException;
  * Date: 10/5/13
  */
 public class Controller extends HttpServlet {
-    private ControllerHelper controllerHelper = ControllerHelper.getInstance();
+    private ActionFactory actionFactory = ActionFactory.getInstance();
 
     public Controller() {
         super();
@@ -24,7 +24,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         String page = null;
         try {
-            Action action = controllerHelper.getAction(request);
+            Action action = actionFactory.getAction(request);
             page = action.execute(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
