@@ -7,5 +7,6 @@ package com.stanislav.pereverziev.socialnetwork.idao;
 public interface IAccountDao {
     public void addAccount(String name, int age, int user_id);
     public void findAccount(int account_id);
+    public void findAccountByName(String name);
     public void findAll();
 }

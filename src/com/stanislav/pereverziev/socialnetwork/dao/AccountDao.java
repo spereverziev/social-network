@@ -18,6 +18,11 @@ public class AccountDao implements IAccountDao {
     }
 
     @Override
+    public void findAccountByName(String name) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public void findAll() {
         //To change body of implemented methods use File | Settings | File Templates.
     }

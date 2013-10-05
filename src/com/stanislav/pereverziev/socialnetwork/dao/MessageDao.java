@@ -22,4 +22,5 @@ public class MessageDao implements IMessageDao {
     public Message[] findAll() {
         return new Message[0];  //To change body of implemented methods use File | Settings | File Templates.
     }
+
 }
