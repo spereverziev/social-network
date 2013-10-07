@@ -26,12 +26,12 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public void addUser(String login, String password) throws SQLException {
+    public void addUser(User user) throws SQLException {
         String query = "INSERT INTO users(login, password) VALUES(?,?)";
         connection = getConnection();
         preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1,login);
-        preparedStatement.setString(2,password);
+        preparedStatement.setString(1,user.getLogin());
+        preparedStatement.setString(2,user.getPassword());
         preparedStatement.executeUpdate();
 
         try {
