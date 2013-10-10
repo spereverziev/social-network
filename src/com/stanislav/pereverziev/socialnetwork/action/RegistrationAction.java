@@ -29,7 +29,7 @@ public class RegistrationAction implements Action {
     public static final String PASSWORD_ERROR = "Confirm password doesn't match password";
     public static final String REGISTRATION_JSP = "/jsp/registration.jsp";
     public static final String SQL_ERROR = "SQL exception. Plz contact administrator.";
-    public static final String ERROR_JSP = "/jsp/error.jsp";
+    public static final String ERROR_JSP = "/jsp/error.jspx";
     private IUserDao userDao;
     private IAccountDao accountDao;
     private User user;

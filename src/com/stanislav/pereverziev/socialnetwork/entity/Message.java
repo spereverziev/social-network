@@ -8,15 +8,15 @@ import java.io.Serializable;
  */
 public class Message implements Serializable{
     private int id;
-    private int from_user;
-    private int to_user;
+    private int fromUser;
+    private int toUser;
     private String text;
     private Boolean isRead;
 
-    public Message(int id, int from_user, int to_user, String text, Boolean isRead) {
+    public Message(int id, int fromUser, int toUser, String text, Boolean isRead) {
         this.id = id;
-        this.from_user = from_user;
-        this.to_user = to_user;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
         this.text = text;
         this.isRead = isRead;
     }
@@ -29,20 +29,20 @@ public class Message implements Serializable{
         this.id = id;
     }
 
-    public int getFrom_user() {
-        return from_user;
+    public int getFromUser() {
+        return fromUser;
     }
 
-    public void setFrom_user(int from_user) {
-        this.from_user = from_user;
+    public void setFromUser(int fromUser) {
+        this.fromUser = fromUser;
     }
 
-    public int getTo_user() {
-        return to_user;
+    public int getToUser() {
+        return toUser;
     }
 
-    public void setTo_user(int to_user) {
-        this.to_user = to_user;
+    public void setToUser(int toUser) {
+        this.toUser = toUser;
     }
 
     public String getText() {

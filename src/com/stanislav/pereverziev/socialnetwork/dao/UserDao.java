@@ -45,7 +45,7 @@ public class UserDao implements IUserDao {
     @Override
     public User findUserById(int userId) throws SQLException {
         User user = null;
-        String query = "SELECT FROM users WHERE id = '" + userId + "'";
+        String query = "SELECT * FROM users WHERE id = '" + userId + "'";
         connection = getConnection();
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
@@ -70,23 +70,24 @@ public class UserDao implements IUserDao {
     @Override
     public User findUserByLogin(String login) throws SQLException{
         User user = null;
-        String query = "SELECT FROM users WHERE login = '" + login + "'";
+        String query = "SELECT * FROM users WHERE login ='" + login + "'";
         connection = getConnection();
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
-
-        try {
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         while (resultSet.next()) {
             user = new User();
             user.setId(resultSet.getInt(1));
             user.setLogin(resultSet.getString(2));
             user.setPassword(resultSet.getString(3));
+        }
+
+        try {
+            preparedStatement.close();
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return user;    }

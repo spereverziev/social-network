@@ -2,6 +2,7 @@ package com.stanislav.pereverziev.socialnetwork.dao;
 
 import com.stanislav.pereverziev.socialnetwork.ConnectionFactory;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
+import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
 
 import java.sql.Connection;
@@ -44,7 +45,36 @@ public class AccountDao implements IAccountDao {
     }
 
     @Override
-    public void findAccount(int account_id) {
+    public Account findAccountByUser(User user) throws SQLException {
+        Account account = null;
+        String query = "SELECT * FROM accounts JOIN users ON account.user_id ='" + user.getId() + "'";
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement(query);
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            account = new Account();
+            account.setId(resultSet.getInt(1));
+            account.setFirstName(resultSet.getString(2));
+            account.setLastName(resultSet.getString(3));
+            account.setEmail(resultSet.getString(4));
+            account.setAge(resultSet.getInt(5));
+        }
+
+        try {
+            preparedStatement.close();
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return account;
+
+    }
+
+    @Override
+    public void findAccount(int accountId) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
