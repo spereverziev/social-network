@@ -7,11 +7,11 @@ import java.io.IOException;
 
 /**
  * User: Stanislav.Pereverziev
- * Date: 10/5/13
+ * Date: 10/15/13
  */
-public class DefaultAction implements Action {
+public class SendMessageAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "/jsp/main.jsp";  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

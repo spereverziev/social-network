@@ -10,6 +10,7 @@ import com.stanislav.pereverziev.socialnetwork.idao.IUserDao;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -38,21 +39,21 @@ public class LoginAction implements Action {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
 
-
+        HttpSession session = request.getSession(true);
         try {
             user = userDao.findUserByLogin(login);
             if (user.getPassword().equals(password)) {
                 account = accountDao.findAccountByUser(user);
-                request.setAttribute("account",account);
-                request.setAttribute(USER, login);
+                session.setAttribute("account", account);
+                session.setAttribute(USER, login);
                 page = MAIN_JSP;
             } else {
-                request.setAttribute(ERROR, WRONG_PASSWORD);
+                session.setAttribute(ERROR, WRONG_PASSWORD);
                 page = ERROR_JSP;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute(ERROR, NO_SUCH_USER);
+            session.setAttribute(ERROR, NO_SUCH_USER);
             page = ERROR_JSP;
         }
 

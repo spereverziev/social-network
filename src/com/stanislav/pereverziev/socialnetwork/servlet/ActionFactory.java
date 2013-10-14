@@ -1,9 +1,6 @@
 package com.stanislav.pereverziev.socialnetwork.servlet;
 
-import com.stanislav.pereverziev.socialnetwork.action.Action;
-import com.stanislav.pereverziev.socialnetwork.action.DefaultAction;
-import com.stanislav.pereverziev.socialnetwork.action.LoginAction;
-import com.stanislav.pereverziev.socialnetwork.action.LogoutAction;
+import com.stanislav.pereverziev.socialnetwork.action.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -21,6 +18,8 @@ public class ActionFactory {
         actions.put("login", new LoginAction());
         actions.put("logout", new LogoutAction());
         actions.put("default", new DefaultAction());
+        actions.put("search", new SearchAction());
+        actions.put("sendFriendsRequest", new SendRequestAction());
     }
 
     public Action getAction(HttpServletRequest request) {

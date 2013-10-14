@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
@@ -47,7 +49,7 @@ public class AccountDao implements IAccountDao {
     @Override
     public Account findAccountByUser(User user) throws SQLException {
         Account account = null;
-        String query = "SELECT * FROM accounts JOIN users ON account.user_id ='" + user.getId() + "'";
+        String query = "SELECT * FROM accounts JOIN users ON accounts.user_id ='" + user.getId() + "'";
         connection = getConnection();
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
@@ -59,6 +61,7 @@ public class AccountDao implements IAccountDao {
             account.setLastName(resultSet.getString(3));
             account.setEmail(resultSet.getString(4));
             account.setAge(resultSet.getInt(5));
+            account.setUserId(resultSet.getInt(6));
         }
 
         try {
@@ -74,17 +77,39 @@ public class AccountDao implements IAccountDao {
     }
 
     @Override
-    public void findAccount(int accountId) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public List findAccountsByName(String name) throws SQLException {
+        List<Account> accounts = new ArrayList<Account>();
+        Account account;
+        String query = "SELECT * FROM accounts WHERE CONCAT(first_name,' ',last_name) = '" + name + "'";
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement(query);
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            account = new Account();
+            account.setId(resultSet.getInt(1));
+            account.setFirstName(resultSet.getString(2));
+            account.setLastName(resultSet.getString(3));
+            account.setEmail(resultSet.getString(4));
+            account.setAge(resultSet.getInt(5));
+            account.setUserId(resultSet.getInt(6));
+
+            accounts.add(account);
+        }
+
+        try {
+            preparedStatement.close();
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return accounts;
     }
 
     @Override
-    public void findAccountByName(String name) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void findAll() {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public List findAll() {
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
@@ -12,7 +13,6 @@ import java.sql.SQLException;
 public interface IAccountDao {
     public void addAccount(Account account) throws SQLException;
     public Account findAccountByUser(User user) throws SQLException;
-    public void findAccount(int accountId);
-    public void findAccountByName(String name);
-    public void findAll();
+    public List findAccountsByName(String name) throws SQLException;
+    public List findAll();
 }

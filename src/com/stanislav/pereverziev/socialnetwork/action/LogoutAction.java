@@ -12,6 +12,7 @@ import java.io.IOException;
 public class LogoutAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        request.getSession().invalidate();
+        return "/jsp/index.jsp";
     }
 }
