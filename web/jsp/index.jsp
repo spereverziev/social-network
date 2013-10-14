@@ -11,11 +11,10 @@
 <body>
 <div id="login">
     <form class="form-signin" method="POST" action="Controller">
-        <input type="hidden" name="action" value ="login"/>
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" name="login" class="input-block-level" placeholder="Login">
         <input type="password" name="password" class="input-block-level" placeholder="Password">
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <button class="btn btn-large btn-primary" name="action" value ="login" type="submit">Sign in</button>
         <button class="btn btn-large btn-success" type="submit">Registration</button>
     </form>
 </div>
