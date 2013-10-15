@@ -15,11 +15,11 @@ import java.sql.SQLException;
  * User: Stanislav.Pereverziev
  * Date: 10/15/13
  */
-public class SendRequestAction implements Action {
+public class SendFriendsRequestAction implements Action {
     private IFriendsRequestsDao friendsRequestsDao;
     private FriendsRequest friendsRequest;
 
-    public SendRequestAction() {
+    public SendFriendsRequestAction() {
         friendsRequestsDao = new FriendsRequestsDao();
         friendsRequest = new FriendsRequest();
     }

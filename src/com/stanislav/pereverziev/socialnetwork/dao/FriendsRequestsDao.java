@@ -1,6 +1,7 @@
 package com.stanislav.pereverziev.socialnetwork.dao;
 
 import com.stanislav.pereverziev.socialnetwork.ConnectionFactory;
+import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.idao.IFriendsRequestsDao;
 
@@ -8,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
@@ -45,5 +48,36 @@ public class FriendsRequestsDao implements IFriendsRequestsDao {
     @Override
     public void acceptRequest(int requestId) throws SQLException {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List findAll() throws SQLException {
+        List<FriendsRequest> friendsRequests = new ArrayList<FriendsRequest>();
+
+        FriendsRequest friendsRequest;
+        String query = "SELECT * FROM friends_requests WHERE friends_requests.is_accepted != '1'";
+        connection = getConnection();
+        preparedStatement = connection.prepareStatement(query);
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            friendsRequest = new FriendsRequest();
+            friendsRequest.setFromUser(resultSet.getInt(1));
+            friendsRequest.setToUser(resultSet.getInt(2));
+            friendsRequest.setAccepted(resultSet.getInt(3) == 1);
+            friendsRequest.setAccountId(resultSet.getInt(4));
+
+            friendsRequests.add(friendsRequest);
+        }
+
+        try {
+            preparedStatement.close();
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return friendsRequests;
     }
 }

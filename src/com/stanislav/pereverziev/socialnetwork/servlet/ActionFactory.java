@@ -19,7 +19,7 @@ public class ActionFactory {
         actions.put("logout", new LogoutAction());
         actions.put("default", new DefaultAction());
         actions.put("search", new SearchAction());
-        actions.put("sendFriendsRequest", new SendRequestAction());
+        actions.put("sendFriendsRequest", new SendFriendsRequestAction());
     }
 
     public Action getAction(HttpServletRequest request) {

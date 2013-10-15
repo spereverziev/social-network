@@ -46,6 +46,9 @@ public class LoginAction implements Action {
                 account = accountDao.findAccountByUser(user);
                 session.setAttribute("account", account);
                 session.setAttribute(USER, login);
+
+
+
                 page = MAIN_JSP;
             } else {
                 session.setAttribute(ERROR, WRONG_PASSWORD);
