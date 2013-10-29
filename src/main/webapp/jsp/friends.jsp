@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <script src="/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 
@@ -17,9 +18,9 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav nav-pills navbar-left">
-                <li class="active"><a href="#" name="action" value="redirect">Home</a></li>
-                <li><a href="#about"> Friends </a></li>
-                <li><a href="#contact"> Messages </a></li>
+                <li><a href="/jsp/main.jsp"><input type="hidden" name="action" value="redirect">Home</a></li>
+                <li class="active"><a href="#"> Friends </a></li>
+                <li><a href="#"> Messages </a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <input type="hidden" name="action" value ="search"/>
@@ -38,21 +39,19 @@
 
 <div class="container">
 
-    <div class="jumbotron">
-        <h1>
-            <img src="/img/no_avatar.jpg" class="img-thumbnail">
-            <c:out value="${sessionScope.account.firstName} ${sessionScope.account.lastName}"/>
-        </h1>
-        <p> <c:out value="${sessionScope.account.age} years old"/> </p>
-        <p> <c:out value="e-mail: ${sessionScope.account.email}"/> </p>
-
-    </div>
-
+    <c:forEach var="friend" items="${friends}">
+        <div class="panel-collapse">
+            <form method="POST" action="Controller">
+                <c:set var="friendsRequestAccount" value="${foundAccount}" scope="session"/>
+                <h3><c:out value="${foundAccount.firstName} ${foundAccount.lastName}"/></h3>
+                <button id="add-friend-button" class="btn btn-success" type="submit" name="action" value="sendFriendsRequest">Add to Friends</button>
+                <button class="btn btn-info" type="submit" name="action" value="sendMessage">Send Message</button>
+            </form>
+        </div>
+    </c:forEach>
 
 </div><!-- /.container -->
 
-
-<script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -5,8 +5,8 @@
 <html>
 <head>
     <title>Be my guest</title>
-    <link rel="stylesheet" href="/css/index.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css"/>
 </head>
 <body>
 <div id="login">

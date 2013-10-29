@@ -3,11 +3,11 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <script src="/js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
+    <script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 
@@ -52,6 +52,6 @@
 
 </div><!-- /.container -->
 
-<script src="js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>js/bootstrap.min.js"></script>
 </body>
 </html>
