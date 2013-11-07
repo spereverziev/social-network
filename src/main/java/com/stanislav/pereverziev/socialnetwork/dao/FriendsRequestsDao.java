@@ -62,10 +62,10 @@ public class FriendsRequestsDao implements IFriendsRequestsDao {
 
         while (resultSet.next()) {
             friendsRequest = new FriendsRequest();
-            friendsRequest.setFromUser(resultSet.getInt(1));
-            friendsRequest.setToUser(resultSet.getInt(2));
-            friendsRequest.setAccepted(resultSet.getInt(3) == 1);
-            friendsRequest.setAccountId(resultSet.getInt(4));
+//            friendsRequest.setFromUser(resultSet.getInt(1));
+//            friendsRequest.setToUser(resultSet.getInt(2));
+//            friendsRequest.setAccepted(resultSet.getInt(3) == 1);
+//            friendsRequest.setAccountId(resultSet.getInt(4));
 
             friendsRequests.add(friendsRequest);
         }

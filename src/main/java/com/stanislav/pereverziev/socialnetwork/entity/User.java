@@ -6,6 +6,10 @@ import java.io.Serializable;
  * User: Stanislav.Pereverziev
  * Date: 10/3/13
  */
+
+@NamedQueries({
+        @NamedQuery(name = "findByLogin",query = "from User user where user.login = :login")
+})
 @Entity
 @Table(name="users")
 public class User implements Serializable {

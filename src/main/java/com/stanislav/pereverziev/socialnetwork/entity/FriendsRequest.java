@@ -1,17 +1,28 @@
 package com.stanislav.pereverziev.socialnetwork.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/15/13
  */
+
+@Entity
+@Table(name = "friends_requests")
 public class FriendsRequest implements Serializable{
+    @Id
+    @GeneratedValue
     private int id;
+    @Column(name = "from_user")
     private int fromUser;
+    @Column(name = "to_user")
     private int toUser;
+    @Column(name = "is_accepted")
     private boolean isAccepted;
-    private int accountId;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public int getId() {
         return id;
@@ -21,20 +32,13 @@ public class FriendsRequest implements Serializable{
         this.id = id;
     }
 
-    public int getFromUser() {
-        return fromUser;
+
+    public Account getAccount() {
+        return account;
     }
 
-    public void setFromUser(int fromUser) {
-        this.fromUser = fromUser;
-    }
-
-    public int getToUser() {
-        return toUser;
-    }
-
-    public void setToUser(int toUser) {
-        this.toUser = toUser;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public boolean isAccepted() {
@@ -45,11 +49,4 @@ public class FriendsRequest implements Serializable{
         isAccepted = accepted;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
 }

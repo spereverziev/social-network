@@ -1,36 +1,49 @@
 package com.stanislav.pereverziev.socialnetwork.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/3/13
  */
+@Entity
+@Table(name="accounts")
+@NamedQueries({
+        @NamedQuery(name = "findByUser",query = "from Account account where account.user = :user")
+})
 public class Account implements Serializable {
+    @Id
+    @GeneratedValue
     private int id;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
     private int age;
     private String email;
-    private int userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Account() {
     }
 
-    public Account(int id, String firstName, String lastName, int age, String email,int userId) {
+    public Account(int id, String firstName, String lastName, int age, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
-        this.userId = userId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {

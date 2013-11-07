@@ -1,99 +1,46 @@
 package com.stanislav.pereverziev.socialnetwork.dao;
 
-import com.stanislav.pereverziev.socialnetwork.ConnectionFactory;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.idao.IUserDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
- * Date: 10/3/13
+ * Date: 10/29/13
  */
 public class UserDao implements IUserDao {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+    EntityManager entityManager;
+    EntityManagerFactory factory;
 
-
-    private Connection getConnection() throws SQLException {
-        Connection conn;
-        conn = ConnectionFactory.getInstance().getConnection();
-        return conn;
+    public UserDao() {
+        factory = Persistence.createEntityManagerFactory("sn-pu");
+        entityManager = factory.createEntityManager();
     }
 
     @Override
     public void addUser(User user) throws SQLException {
-        String query = "INSERT INTO users(login, password) VALUES(?,?)";
-        connection = getConnection();
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1,user.getLogin());
-        preparedStatement.setString(2,user.getPassword());
-        preparedStatement.executeUpdate();
-
-        try {
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        entityManager.merge(user);
     }
 
     @Override
     public User findUserById(int userId) throws SQLException {
-        User user = null;
-        String query = "SELECT * FROM users WHERE id = '" + userId + "'";
-        connection = getConnection();
-        preparedStatement = connection.prepareStatement(query);
-        resultSet = preparedStatement.executeQuery();
-
-        try {
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        while (resultSet.next()) {
-            user = new User();
-            user.setId(resultSet.getInt(1));
-            user.setLogin(resultSet.getString(2));
-            user.setPassword(resultSet.getString(3));
-        }
-
-        return user;
+        return entityManager.find(User.class, userId);
     }
 
     @Override
-    public User findUserByLogin(String login) throws SQLException{
-        User user = null;
-        String query = "SELECT * FROM users WHERE login ='" + login + "'";
-        connection = getConnection();
-        preparedStatement = connection.prepareStatement(query);
-        resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            user = new User();
-            user.setId(resultSet.getInt(1));
-            user.setLogin(resultSet.getString(2));
-            user.setPassword(resultSet.getString(3));
-        }
-
-        try {
-            preparedStatement.close();
-            connection.close();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return user;    }
+    public User findUserByLogin(String login) throws SQLException {
+        return (User) entityManager.createNamedQuery("findByLogin").setParameter("login", login).getSingleResult();
+    }
 
     @Override
-    public User[] findAll() {
-        return new User[0];  //To change body of implemented methods use File | Settings | File Templates.
+    public List findAll() {
+
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

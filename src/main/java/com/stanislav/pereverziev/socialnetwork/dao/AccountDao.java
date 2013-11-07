@@ -5,6 +5,10 @@ import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +25,14 @@ public class AccountDao implements IAccountDao {
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
+    EntityManager entityManager;
+    EntityManagerFactory factory;
+
+    public AccountDao() {
+        factory = Persistence.createEntityManagerFactory("sn-pu");
+        entityManager = factory.createEntityManager();
+    }
+
     private Connection getConnection() throws SQLException {
         Connection conn;
         conn = ConnectionFactory.getInstance().getConnection();
@@ -36,7 +48,6 @@ public class AccountDao implements IAccountDao {
         preparedStatement.setString(2, account.getLastName());
         preparedStatement.setString(3, account.getEmail());
         preparedStatement.setInt(4, account.getAge());
-        preparedStatement.setInt(5, account.getUserId());
         preparedStatement.executeUpdate();
         try {
             preparedStatement.close();
@@ -48,32 +59,12 @@ public class AccountDao implements IAccountDao {
 
     @Override
     public Account findAccountByUser(User user) throws SQLException {
-        Account account = null;
-        String query = "SELECT * FROM accounts JOIN users ON accounts.user_id ='" + user.getId() + "'";
-        connection = getConnection();
-        preparedStatement = connection.prepareStatement(query);
-        resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            account = new Account();
-            account.setId(resultSet.getInt(1));
-            account.setFirstName(resultSet.getString(2));
-            account.setLastName(resultSet.getString(3));
-            account.setEmail(resultSet.getString(4));
-            account.setAge(resultSet.getInt(5));
-            account.setUserId(resultSet.getInt(6));
-        }
-
-        try {
-            preparedStatement.close();
-            connection.close();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return account;
-
+        System.out.println("1");
+        Query query = entityManager.createNamedQuery("findByUser").setParameter("user", user);
+        System.out.println("2");
+        Object result = query.getSingleResult();
+        System.out.println("3");
+        return (Account) result;
     }
 
     @Override
@@ -92,7 +83,7 @@ public class AccountDao implements IAccountDao {
             account.setLastName(resultSet.getString(3));
             account.setEmail(resultSet.getString(4));
             account.setAge(resultSet.getInt(5));
-            account.setUserId(resultSet.getInt(6));
+//            account.setUserId(resultSet.getInt(6));
 
             accounts.add(account);
         }

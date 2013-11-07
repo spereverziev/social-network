@@ -88,7 +88,6 @@ public class RegistrationAction implements Action {
         account.setLastName(lastName);
         account.setAge(age);
         account.setEmail(email);
-        account.setUserId(userId);
     }
 
     private void initializeUser(String login, String password) {

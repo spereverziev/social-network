@@ -47,8 +47,6 @@ public class LoginAction implements Action {
                 session.setAttribute("account", account);
                 session.setAttribute(USER, login);
 
-
-
                 page = MAIN_JSP;
             } else {
                 session.setAttribute(ERROR, WRONG_PASSWORD);
