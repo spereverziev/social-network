@@ -20,6 +20,8 @@ public class ActionFactory {
         actions.put("default", new DefaultAction());
         actions.put("search", new SearchAction());
         actions.put("sendFriendsRequest", new SendFriendsRequestAction());
+        actions.put("showFriends", new ShowFriendsAction());
+        actions.put("goHome", new GoHomeAction());
     }
 
     public Action getAction(HttpServletRequest request) {

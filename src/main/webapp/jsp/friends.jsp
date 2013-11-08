@@ -3,55 +3,29 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <script src="/js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
+    <script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">be my guest</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav nav-pills navbar-left">
-                <li><a href="/jsp/main.jsp"><input type="hidden" name="action" value="redirect">Home</a></li>
-                <li class="active"><a href="#"> Friends </a></li>
-                <li><a href="#"> Messages </a></li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <input type="hidden" name="action" value ="search"/>
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default"> Go! </button>
-            </form>
-
-            <ul class="nav nav-pills navbar-right">
-                <li><a href="./">Logout</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
+<jsp:include page="header.jsp"/>
 
 <div class="container">
-
-    <c:forEach var="friend" items="${friends}">
+    <c:forEach var="friendsRequest" items="${account.friendsRequests}">
         <div class="panel-collapse">
             <form method="POST" action="Controller">
-                <c:set var="friendsRequestAccount" value="${foundAccount}" scope="session"/>
-                <h3><c:out value="${foundAccount.firstName} ${foundAccount.lastName}"/></h3>
-                <button id="add-friend-button" class="btn btn-success" type="submit" name="action" value="sendFriendsRequest">Add to Friends</button>
-                <button class="btn btn-info" type="submit" name="action" value="sendMessage">Send Message</button>
+                <h3><c:out value="${friendsRequest.sender.account.firstName} ${friendsRequest.sender.account.lastName}"/></h3>
+                <button id="add-friend-button" class="btn btn-success" type="submit" name="action" value="acceptFriendsRequest">Accept</button>
+                <button class="btn btn-danger" type="submit" name="action" value="dismissFriendsRequest">Dismiss</button>
             </form>
         </div>
     </c:forEach>
 
-</div><!-- /.container -->
+</div>
 
-<script src="js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -10,31 +10,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">be my guest</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav nav-pills navbar-left">
-                <li class="active"><a href="#" name="action" value="redirect">Home</a></li>
-                <li><a href="#about"> Friends </a></li>
-                <li><a href="#contact"> Messages </a></li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <input type="hidden" name="action" value ="search"/>
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default"> Go! </button>
-            </form>
-
-            <ul class="nav nav-pills navbar-right">
-                <li><a href="./">Logout</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
+<jsp:include page="header.jsp"/>
 
 <div class="container">
 

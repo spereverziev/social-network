@@ -30,13 +30,9 @@ public class SendFriendsRequestAction implements Action {
         String page;
         Account myAccount = (Account) request.getSession().getAttribute("account");
         Account friendAccount = (Account) request.getAttribute("friendsRequestAccount");
-        try {
-            friendsRequestsDao.addFriendsRequest(1, 1, myAccount.getId());
-            page = "/jsp/main.jsp";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            page = "/jsp/error.jsp";
-        }
+
+        friendsRequestsDao.addFriendsRequest(1, 1, myAccount.getId());
+        page = "/jsp/main.jsp";
 
         return page;
     }

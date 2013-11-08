@@ -7,11 +7,11 @@ import java.io.Serializable;
  * Date: 10/3/13
  */
 
+@Entity
+@Table(name="users")
 @NamedQueries({
         @NamedQuery(name = "findByLogin",query = "from User user where user.login = :login")
 })
-@Entity
-@Table(name="users")
 public class User implements Serializable {
     @Id
     @GeneratedValue
@@ -19,7 +19,15 @@ public class User implements Serializable {
     private String login;
     private String password;
 
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     public User() {
+    }
+
+    public Account getAccount() {
+        return account;
     }
 
     public User(int id, String login, String password) {

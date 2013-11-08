@@ -2,6 +2,7 @@ package com.stanislav.pereverziev.socialnetwork.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ import java.util.List;
 @Entity
 @Table(name="accounts")
 @NamedQueries({
-        @NamedQuery(name = "findByUser",query = "from Account account where account.user = :user")
+        @NamedQuery(name = "findByUser",query = "from Account account where account.user = :user"),
+        @NamedQuery(name = "findByName",
+                query = "from Account account where concat(account.firstName,account.lastName) like :name")
 })
 public class Account implements Serializable {
     @Id
@@ -26,16 +29,18 @@ public class Account implements Serializable {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<FriendsRequest> friendsRequests = new ArrayList<FriendsRequest>();
 
     public Account() {
     }
 
-    public Account(int id, String firstName, String lastName, int age, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
+    public List<FriendsRequest> getFriendsRequests() {
+        return friendsRequests;
+    }
+
+    public void setFriendsRequests(List<FriendsRequest> friendsRequests) {
+        this.friendsRequests = friendsRequests;
     }
 
     public User getUser() {

@@ -14,13 +14,15 @@ public class FriendsRequest implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @Column(name = "from_user")
-    private int fromUser;
-    @Column(name = "to_user")
-    private int toUser;
+    @OneToOne
+    @JoinColumn(name = "from_user")
+    private User sender;
+    @OneToOne
+    @JoinColumn(name = "to_user")
+    private User receiver;
     @Column(name = "is_accepted")
     private boolean isAccepted;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
 
@@ -32,13 +34,20 @@ public class FriendsRequest implements Serializable{
         this.id = id;
     }
 
-
-    public Account getAccount() {
-        return account;
+    public User getSender() {
+        return sender;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public boolean isAccepted() {
@@ -49,4 +58,11 @@ public class FriendsRequest implements Serializable{
         isAccepted = accepted;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
