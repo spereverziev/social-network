@@ -20,19 +20,34 @@ public class Account implements Serializable {
     @Id
     @GeneratedValue
     private int id;
+
     @Column(name="first_name")
     private String firstName;
+
     @Column(name="last_name")
     private String lastName;
+
     private int age;
     private String email;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<FriendsRequest> friendsRequests = new ArrayList<FriendsRequest>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "friends",
+            joinColumns = { @JoinColumn(name = "account_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")})
+    private List<User> friends;
+
     public Account() {
+    }
+
+    public List<User> getFriends() {
+        return friends;
     }
 
     public List<FriendsRequest> getFriendsRequests() {
