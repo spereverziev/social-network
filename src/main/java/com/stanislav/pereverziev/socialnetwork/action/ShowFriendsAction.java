@@ -1,6 +1,8 @@
 package com.stanislav.pereverziev.socialnetwork.action;
 
 
+import com.stanislav.pereverziev.socialnetwork.util.Constants;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,6 @@ import java.io.IOException;
 public class ShowFriendsAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "/jsp/friends.jsp";
+        return Constants.FRIENDS_JSP;
     }
 }

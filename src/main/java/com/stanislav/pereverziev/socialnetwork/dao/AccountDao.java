@@ -14,13 +14,9 @@ import java.util.List;
  * User: Stanislav.Pereverziev
  * Date: 10/3/13
  */
-public class AccountDao implements IAccountDao {
-    EntityManager entityManager;
-    EntityManagerFactory factory;
+public class AccountDao extends DataAccessObject implements IAccountDao {
 
     public AccountDao() {
-        factory = Persistence.createEntityManagerFactory("sn-pu");
-        entityManager = factory.createEntityManager();
     }
 
     @Override

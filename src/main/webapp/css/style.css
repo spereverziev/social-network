@@ -1,0 +1,17 @@
+.MessageText {
+    height: 50px;
+    width: 70%;
+    border: 1px solid dodgerblue;
+    display: block;
+}
+
+.MessageSender {
+    width: 20%;
+    float: left;
+    padding-left: 3px;
+}
+
+.MessageTable {
+    height: 50px;
+    display: block;
+}

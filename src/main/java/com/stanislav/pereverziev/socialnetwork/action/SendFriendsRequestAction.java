@@ -4,12 +4,12 @@ import com.stanislav.pereverziev.socialnetwork.dao.FriendsRequestsDao;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.idao.IFriendsRequestsDao;
+import com.stanislav.pereverziev.socialnetwork.util.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * User: Stanislav.Pereverziev
@@ -28,11 +28,11 @@ public class SendFriendsRequestAction implements Action {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page;
-        Account myAccount = (Account) request.getSession().getAttribute("account");
-        Account friendAccount = (Account) request.getAttribute("friendsRequestAccount");
+        Account myAccount = (Account) request.getSession().getAttribute(Constants.ATTRIBUTE_ACCOUNT);
+        Account friendAccount = (Account) request.getAttribute(Constants.ATTRIBUTE_FRIENDS_REQUEST_ACCOUNT);
 
         friendsRequestsDao.addFriendsRequest(1, 1, myAccount.getId());
-        page = "/jsp/main.jsp";
+        page = Constants.MAIN_JSP;
 
         return page;
     }

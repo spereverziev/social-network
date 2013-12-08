@@ -1,24 +1,46 @@
 package com.stanislav.pereverziev.socialnetwork.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/5/13
  */
-public class Message implements Serializable{
+
+@Entity
+@Table(name = "messages")
+public class Message implements Serializable {
+    @Id
+    @GeneratedValue
     private int id;
-    private int fromUser;
-    private int toUser;
+    @OneToOne
+    @JoinColumn(name = "from_user")
+    private User sender;
+    @OneToOne
+    @JoinColumn(name = "to_user")
+    private User receiver;
     private String text;
     private Boolean isRead;
 
-    public Message(int id, int fromUser, int toUser, String text, Boolean isRead) {
-        this.id = id;
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    public Message() {
+    }
+
+    public Message(User sender, User receiver, String text, Boolean read, Account account, Date date) {
+        this.sender = sender;
+        this.receiver = receiver;
         this.text = text;
-        this.isRead = isRead;
+        isRead = read;
+        this.account = account;
+        this.date = date;
     }
 
     public int getId() {
@@ -29,20 +51,20 @@ public class Message implements Serializable{
         this.id = id;
     }
 
-    public int getFromUser() {
-        return fromUser;
+    public User getSender() {
+        return sender;
     }
 
-    public void setFromUser(int fromUser) {
-        this.fromUser = fromUser;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public int getToUser() {
-        return toUser;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setToUser(int toUser) {
-        this.toUser = toUser;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public String getText() {
@@ -59,5 +81,21 @@ public class Message implements Serializable{
 
     public void setRead(Boolean read) {
         isRead = read;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

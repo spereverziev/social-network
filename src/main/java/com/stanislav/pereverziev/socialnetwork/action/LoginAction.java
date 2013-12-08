@@ -6,6 +6,7 @@ import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
 import com.stanislav.pereverziev.socialnetwork.idao.IUserDao;
+import com.stanislav.pereverziev.socialnetwork.util.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +21,7 @@ import java.sql.SQLException;
  */
 public class LoginAction implements Action {
     public static final String USER = "user";
-    public static final String MAIN_JSP = "/jsp/main.jsp";
     public static final String ERROR = "error";
-    public static final String ERROR_JSP = "/jsp/error.jspx";
     public static final String WRONG_PASSWORD = "Wrong password!";
     public static final String NO_SUCH_USER = "No such user";
     private IUserDao userDao = new UserDao();
@@ -47,15 +46,15 @@ public class LoginAction implements Action {
                 session.setAttribute("account", account);
                 session.setAttribute(USER, login);
 
-                page = MAIN_JSP;
+                page = Constants.MAIN_JSP;
             } else {
                 session.setAttribute(ERROR, WRONG_PASSWORD);
-                page = ERROR_JSP;
+                page = Constants.ERROR_JSP;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute(ERROR, NO_SUCH_USER);
-            page = ERROR_JSP;
+            page = Constants.ERROR_JSP;
         }
 
         return page;

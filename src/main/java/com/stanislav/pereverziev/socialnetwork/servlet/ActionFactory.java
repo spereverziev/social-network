@@ -21,6 +21,7 @@ public class ActionFactory {
         actions.put("search", new SearchAction());
         actions.put("sendFriendsRequest", new SendFriendsRequestAction());
         actions.put("showFriends", new ShowFriendsAction());
+        actions.put("showMessages", new ShowMessagesAction());
         actions.put("goHome", new GoHomeAction());
     }
 

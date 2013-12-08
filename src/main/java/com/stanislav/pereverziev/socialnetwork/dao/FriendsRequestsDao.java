@@ -10,15 +10,11 @@ import javax.persistence.Persistence;
  * User: Stanislav.Pereverziev
  * Date: 10/13/13
  */
-public class FriendsRequestsDao implements IFriendsRequestsDao {
-    private EntityManager entityManager;
-    private EntityManagerFactory factory;
+public class FriendsRequestsDao extends DataAccessObject implements IFriendsRequestsDao {
 
     public FriendsRequestsDao() {
-        factory = Persistence.createEntityManagerFactory("sn-pu");
-        entityManager = factory.createEntityManager();
-    }
 
+    }
 
     @Override
     public void addFriendsRequest(int fromUser, int toUser, int accountId) {

@@ -11,8 +11,8 @@ import java.util.List;
  * Date: 10/3/13
  */
 public interface IAccountDao {
-    public void addAccount(Account account) throws SQLException;
-    public Account findAccountByUser(User user) throws SQLException;
-    public List findAccountsByName(String name) throws SQLException;
-    public List findAll();
+    void addAccount(Account account) throws SQLException;
+    Account findAccountByUser(User user) throws SQLException;
+    List findAccountsByName(String name) throws SQLException;
+    List findAll();
 }

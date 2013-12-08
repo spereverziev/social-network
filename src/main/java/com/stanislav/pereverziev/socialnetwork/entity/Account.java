@@ -35,7 +35,7 @@ public class Account implements Serializable {
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-    private List<FriendsRequest> friendsRequests = new ArrayList<FriendsRequest>();
+    private List<FriendsRequest> friendsRequests;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "friends",
@@ -43,7 +43,22 @@ public class Account implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
     private List<User> friends;
 
+    @OneToMany(mappedBy = "account")
+    private List<Message> messages;
+
     public Account() {
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public List<User> getFriends() {

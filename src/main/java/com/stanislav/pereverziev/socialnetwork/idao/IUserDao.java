@@ -10,8 +10,8 @@ import java.util.List;
  * Date: 10/3/13
  */
 public interface IUserDao {
-    public void addUser(User user) throws SQLException;
-    public User findUserById(int userId) throws SQLException;
-    public User findUserByLogin(String login) throws SQLException;
-    public List findAll();
+    void addUser(User user) throws SQLException;
+    User findUserById(int userId) throws SQLException;
+    User findUserByLogin(String login) throws SQLException;
+    List findAll();
 }

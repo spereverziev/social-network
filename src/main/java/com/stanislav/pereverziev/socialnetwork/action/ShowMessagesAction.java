@@ -9,11 +9,11 @@ import java.io.IOException;
 
 /**
  * User: Stanislav.Pereverziev
- * Date: 11/8/13
+ * Date: 12/8/13
  */
-public class GoHomeAction implements Action {
+public class ShowMessagesAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return Constants.MAIN_JSP;
+        return Constants.MESSAGES_JSP;
     }
 }

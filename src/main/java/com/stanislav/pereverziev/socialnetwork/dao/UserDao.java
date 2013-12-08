@@ -14,13 +14,8 @@ import java.util.List;
  * User: Stanislav.Pereverziev
  * Date: 10/29/13
  */
-public class UserDao implements IUserDao {
-    EntityManager entityManager;
-    EntityManagerFactory factory;
-
+public class UserDao extends DataAccessObject implements IUserDao {
     public UserDao() {
-        factory = Persistence.createEntityManagerFactory("sn-pu");
-        entityManager = factory.createEntityManager();
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.stanislav.pereverziev.socialnetwork.entity.Message;
  * Date: 10/5/13
  */
 public interface IMessageDao {
-    public void addMessage(int from_user, int to_user, String text);
-    public Message findMessage(int id);
-    public Message[] findAll();
+    void addMessage(int from_user, int to_user, String text);
+    Message findMessage(int id);
+    Message[] findAll();
 }
