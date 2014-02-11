@@ -2,13 +2,23 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
-    <persistence-unit name="sn-pu" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <non-jta-data-source>sn-Resource</non-jta-data-source>
-        <!-- class definitions here, nothing else -->
-
+    <!--<persistence-unit name="sn-pu" transaction-type="RESOURCE_LOCAL">-->
+        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+        <!--<non-jta-data-source>sn-Resource</non-jta-data-source>-->
+        <!--<properties>-->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
+        <!--</properties>-->
+    <!--</persistence-unit>-->
+    <persistence-unit name="sn-pu">
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/social_network"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="openjpa.ConnectionFactoryProperties" value="MaxActive=10,MaxIdle=5,MinIdle=2,MaxWait=1800000"/>
+            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.MySQLDictionary"/>
+            <property name="openjpa.DataCache" value="true"/>
+            <property name="openjpa.QueryCache" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
