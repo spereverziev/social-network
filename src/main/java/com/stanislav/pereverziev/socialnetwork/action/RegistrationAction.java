@@ -2,10 +2,10 @@ package com.stanislav.pereverziev.socialnetwork.action;
 
 import com.stanislav.pereverziev.socialnetwork.dao.AccountDao;
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.AccountDaoImpl;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.UserDaoImpl;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
-import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
-import com.stanislav.pereverziev.socialnetwork.idao.IUserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +30,14 @@ public class RegistrationAction implements Action {
     public static final String REGISTRATION_JSP = "/jsp/registration.jsp";
     public static final String SQL_ERROR = "SQL exception. Plz contact administrator.";
     public static final String ERROR_JSP = "/jsp/error.jspx";
-    private IUserDao userDao;
-    private IAccountDao accountDao;
+    private UserDao userDao;
+    private AccountDao accountDao;
     private User user;
     private Account account;
 
     public RegistrationAction() {
-        userDao = new UserDao();
-        accountDao = new AccountDao();
+        userDao = new UserDaoImpl();
+        accountDao = new AccountDaoImpl();
         user = new User();
         account = new Account();
     }

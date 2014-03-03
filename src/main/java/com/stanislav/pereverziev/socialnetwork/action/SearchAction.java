@@ -1,7 +1,7 @@
 package com.stanislav.pereverziev.socialnetwork.action;
 
 import com.stanislav.pereverziev.socialnetwork.dao.AccountDao;
-import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.AccountDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +16,11 @@ import java.util.List;
  * Date: 10/13/13
  */
 public class SearchAction implements Action {
-    private IAccountDao accountDao;
+    private AccountDao accountDao;
     private List accounts;
 
     public SearchAction() {
-        accountDao = new AccountDao();
+        accountDao = new AccountDaoImpl();
     }
 
     @Override

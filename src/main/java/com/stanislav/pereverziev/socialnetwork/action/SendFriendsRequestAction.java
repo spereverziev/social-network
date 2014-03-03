@@ -1,9 +1,9 @@
 package com.stanislav.pereverziev.socialnetwork.action;
 
 import com.stanislav.pereverziev.socialnetwork.dao.FriendsRequestsDao;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.FriendsRequestsDaoImpl;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
-import com.stanislav.pereverziev.socialnetwork.idao.IFriendsRequestsDao;
 import com.stanislav.pereverziev.socialnetwork.util.Constants;
 
 import javax.servlet.ServletException;
@@ -16,11 +16,11 @@ import java.io.IOException;
  * Date: 10/15/13
  */
 public class SendFriendsRequestAction implements Action {
-    private IFriendsRequestsDao friendsRequestsDao;
+    private FriendsRequestsDao friendsRequestsDao;
     private FriendsRequest friendsRequest;
 
     public SendFriendsRequestAction() {
-        friendsRequestsDao = new FriendsRequestsDao();
+        friendsRequestsDao = new FriendsRequestsDaoImpl();
         friendsRequest = new FriendsRequest();
     }
 

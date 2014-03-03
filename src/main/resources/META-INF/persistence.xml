@@ -2,14 +2,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
-    <!--<persistence-unit name="sn-pu" transaction-type="RESOURCE_LOCAL">-->
-        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
-        <!--<non-jta-data-source>sn-Resource</non-jta-data-source>-->
-        <!--<properties>-->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
-        <!--</properties>-->
-    <!--</persistence-unit>-->
-    <persistence-unit name="sn-pu">
+    <persistence-unit name="jdbc/social-network">
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/social_network"/>
             <property name="javax.persistence.jdbc.user" value="root"/>

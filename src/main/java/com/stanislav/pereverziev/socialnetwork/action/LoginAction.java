@@ -2,10 +2,10 @@ package com.stanislav.pereverziev.socialnetwork.action;
 
 import com.stanislav.pereverziev.socialnetwork.dao.AccountDao;
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.AccountDaoImpl;
+import com.stanislav.pereverziev.socialnetwork.dao.implementation.UserDaoImpl;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
-import com.stanislav.pereverziev.socialnetwork.idao.IAccountDao;
-import com.stanislav.pereverziev.socialnetwork.idao.IUserDao;
 import com.stanislav.pereverziev.socialnetwork.util.Constants;
 
 import javax.servlet.ServletException;
@@ -24,8 +24,8 @@ public class LoginAction implements Action {
     public static final String ERROR = "error";
     public static final String WRONG_PASSWORD = "Wrong password!";
     public static final String NO_SUCH_USER = "No such user";
-    private IUserDao userDao = new UserDao();
-    private IAccountDao accountDao = new AccountDao();
+    private UserDao userDao = new UserDaoImpl();
+    private AccountDao accountDao = new AccountDaoImpl();
     private User user = new User();
     private Account account = new Account();
 

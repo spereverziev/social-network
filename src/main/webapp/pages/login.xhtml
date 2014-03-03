@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+    <title>Be my guest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h:outputStylesheet library="css" name="index.css" />
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<h:body>
+<div id="login">
+    <h:form class="form-signin" method="POST" action="Controller">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <h:inputText type="text" name="login" value="#{loginBean.login}" class="input-block-level" placeholder="Login"/>
+        <h:inputText type="password" name="password" value="#{loginBean.password}" class="input-block-level" placeholder="Password"/>
+        <h:commandButton class="btn btn-large btn-primary" value="Sign In"/>
+        <h:commandButton class="btn btn-large btn-success" value="Registration"/>
+    </h:form>
+</div>
+</h:body>
+</html>

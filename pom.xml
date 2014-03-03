@@ -27,26 +27,12 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
-
-
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>el-api</artifactId>
             <version>2.1.2-b05</version>
             <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>2.5</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -62,11 +48,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.2.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_2.5_spec</artifactId>
-            <version>1.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.geronimo.specs</groupId>-->
+            <!--<artifactId>geronimo-servlet_2.5_spec</artifactId>-->
+            <!--<version>1.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -77,6 +63,36 @@
             <artifactId>richfaces-core-api</artifactId>
             <version>4.3.4.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <!-- CDI Dependencies -->
+
+        <dependency>
+            <groupId>org.apache.openwebbeans</groupId>
+            <artifactId>openwebbeans-impl</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
+        <!-- Bean Validation Dependencies -->
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <scope>compile</scope>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>social-network</finalName>
@@ -156,15 +172,6 @@
                     </exclusions>
                 </dependency>
             </dependencies>
-        </profile>
-        <profile>
-            <id>mysql</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <jetty.resources.conf>src/main/resources/jetty</jetty.resources.conf>
-            </properties>
         </profile>
     </profiles>
 

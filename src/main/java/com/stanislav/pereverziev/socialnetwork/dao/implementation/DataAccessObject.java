@@ -1,4 +1,4 @@
-package com.stanislav.pereverziev.socialnetwork.dao;
+package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +13,7 @@ public abstract class DataAccessObject {
     protected EntityManagerFactory factory;
 
     public DataAccessObject() {
-        factory = Persistence.createEntityManagerFactory("sn-pu");
+        factory = Persistence.createEntityManagerFactory("jdbc/social-network");
         entityManager = factory.createEntityManager();
     }
 }
