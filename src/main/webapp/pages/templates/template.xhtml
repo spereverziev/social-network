@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Be my guest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h:outputStylesheet library="css" name="main.css" />
+    <h:outputStylesheet library="css" name="index.css" />
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{homeBean.init}" />
+    </f:metadata>
+
+    <h:panelGroup>
+        <div class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">be my guest</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav nav-pills navbar-left">
+                        <li class="active"><h:link value="Home" outcome="home"/> </li>
+                        <li><h:link value="Friends" outcome="friends" /> </li>
+                        <li><h:link value="Messages" outcome="friends" /> </li>
+                    </ul>
+
+                    <h:form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <h:inputText type="text" name="name" class="form-control" placeholder="Search"/>
+                        </div>
+                        <h:commandButton type="submit" value="Search" class="btn btn-default"/>
+                    </h:form>
+
+                    <ul class="nav nav-pills navbar-right">
+                        <li><h:form><h:commandLink action="#{userSession.logout}" value="Logout"/></h:form></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>
+
+    <h:panelGroup id="content" layout="block">
+        <ui:insert name="content">Main Content</ui:insert>
+    </h:panelGroup>
+
+</h:body>
+</html>
