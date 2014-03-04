@@ -12,10 +12,10 @@
     <properties>
         <maven.build.timestamp.format>ddMMyyyy_HHmm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-
-        <jsf-myfaces.version>2.1.7</jsf-myfaces.version>
+        <!--<jsf-myfaces.version>2.1.7</jsf-myfaces.version>-->
+        <!--<openwebbeans.version>1.1.6</openwebbeans.version>-->
         <jetty.maven.plugin.version>6.1.26</jetty.maven.plugin.version>
-        <jetty.resources.conf>src/main/resources/jetty</jetty.resources.conf>
+        <jetty.resources.conf>src/main/webapp/WEB-INF</jetty.resources.conf>
         <jdbc.prefix />
     </properties>
 
@@ -65,6 +65,15 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- JSF Dependencies -->
+        <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
             <version>2.1.7</version>
@@ -78,9 +87,9 @@
         <!-- CDI Dependencies -->
 
         <dependency>
-            <groupId>org.apache.openwebbeans</groupId>
-            <artifactId>openwebbeans-impl</artifactId>
-            <version>1.1.6</version>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>1.1.8.Final</version>
         </dependency>
 
         <!-- Bean Validation Dependencies -->
@@ -112,7 +121,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>${project.basedir}/src/main/resources/jetty</directory>
+                            <directory>${project.basedir}/src/main/webapp/WEB-INF</directory>
                         </resource>
                     </webResources>
                     <packagingExcludes>
@@ -159,17 +168,6 @@
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-client</artifactId>
                     <version>9.0.4.v20130625</version>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>jstl</artifactId>
-                    <version>1.2</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>javax.servlet</groupId>
-                            <artifactId>jsp-api</artifactId>
-                        </exclusion>
-                    </exclusions>
                 </dependency>
             </dependencies>
         </profile>

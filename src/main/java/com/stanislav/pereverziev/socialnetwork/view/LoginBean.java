@@ -20,22 +20,25 @@ import java.sql.SQLException;
  * Created by e212232 (Stanislav Pereverziev) .
  * on 3/3/14
  */
-@Named
+@Named("loginBean")
 @RequestScoped
 public class LoginBean implements Serializable {
 
-    private String login;
+    private String email;
     private String password;
 
     @Inject
     private UserDao userDao;
 
-    public String getLogin() {
-        return login;
+    @Inject
+    private UserSession userSession;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -46,12 +49,14 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-    public String verifyData() {
-        if (login == null || password == null) {
-            FacesUtil.addError("Incorrect login/password");
+    public String login() {
+        if (email == null || password == null) {
+            FacesUtil.addError("Incorrect email/password");
         } else {
             try {
-                User user = userDao.findUserByLogin(login);
+                User user = userDao.findUserByEmail(email);
+                userSession.setUser(user);
+                return "/pages/home.jsf";
             } catch (SQLException e) {
                 FacesUtil.addError("SQL Error");
                 e.printStackTrace();

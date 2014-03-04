@@ -28,13 +28,12 @@ public class UserDaoImpl extends DataAccessObject implements UserDao,Serializabl
     }
 
     @Override
-    public User findUserByLogin(String login) throws SQLException {
-        return (User) entityManager.createNamedQuery("findByLogin").setParameter("login", login).getSingleResult();
+    public User findUserByEmail(String email) throws SQLException {
+        return (User) entityManager.createNamedQuery("findByLogin").setParameter("email", email).getSingleResult();
     }
 
     @Override
     public List findAll() {
-
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

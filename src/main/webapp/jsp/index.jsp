@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css"/>
 </head>
 <body>
-<div id="login">
+<div id="email">
     <form class="form-signin" method="POST" action="Controller">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="login" class="input-block-level" placeholder="Login">
+        <input type="text" name="email" class="input-block-level" placeholder="Login">
         <input type="password" name="password" class="input-block-level" placeholder="Password">
-        <button class="btn btn-large btn-primary" name="action" value ="login" type="submit">Sign in</button>
+        <button class="btn btn-large btn-primary" name="action" value ="email" type="submit">Sign in</button>
         <button class="btn btn-large btn-success" type="submit">Registration</button>
     </form>
 </div>

@@ -63,7 +63,7 @@ public class RegistrationAction implements Action {
 
         try {
             userDao.addUser(user);
-            userId = userDao.findUserByLogin(login).getId();
+            userId = userDao.findUserByEmail(login).getId();
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute(ERROR, SQL_ERROR);
@@ -91,7 +91,7 @@ public class RegistrationAction implements Action {
     }
 
     private void initializeUser(String login, String password) {
-        user.setLogin(login);
+        user.setEmail(login);
         user.setPassword(password);
     }
 }

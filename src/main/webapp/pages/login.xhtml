@@ -16,12 +16,12 @@
 </h:head>
 
 <h:body>
-<div id="login">
+<div id="email">
     <h:form class="form-signin" method="POST" action="Controller">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <h:inputText type="text" name="login" value="#{loginBean.login}" class="input-block-level" placeholder="Login"/>
+        <h:inputText type="text" name="email" value="#{loginBean.email}" class="input-block-level" placeholder="Email"/>
         <h:inputText type="password" name="password" value="#{loginBean.password}" class="input-block-level" placeholder="Password"/>
-        <h:commandButton class="btn btn-large btn-primary" value="Sign In"/>
+        <h:commandButton class="btn btn-large btn-primary" action="#{loginBean.login}" value="Sign In"/>
         <h:commandButton class="btn btn-large btn-success" value="Registration"/>
     </h:form>
 </div>

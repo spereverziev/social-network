@@ -40,7 +40,7 @@ public class LoginAction implements Action {
 
         HttpSession session = request.getSession(true);
         try {
-            user = userDao.findUserByLogin(login);
+            user = userDao.findUserByEmail(login);
             if (user.getPassword().equals(password)) {
                 account = accountDao.findAccountByUser(user);
                 session.setAttribute("account", account);

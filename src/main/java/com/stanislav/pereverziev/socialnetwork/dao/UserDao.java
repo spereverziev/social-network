@@ -12,6 +12,6 @@ import java.util.List;
 public interface UserDao {
     void addUser(User user) throws SQLException;
     User findUserById(int userId) throws SQLException;
-    User findUserByLogin(String login) throws SQLException;
+    User findUserByEmail(String email) throws SQLException;
     List findAll();
 }

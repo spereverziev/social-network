@@ -10,13 +10,13 @@ import java.io.Serializable;
 @Entity
 @Table(name="users")
 @NamedQueries({
-        @NamedQuery(name = "findByLogin",query = "from User user where user.login = :login")
+        @NamedQuery(name = "findByLogin",query = "from User user where user.email = :email")
 })
 public class User implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private String login;
+    private String email;
     private String password;
 
     @OneToOne
@@ -30,9 +30,9 @@ public class User implements Serializable {
         return account;
     }
 
-    public User(int id, String login, String password) {
+    public User(int id, String email, String password) {
         this.id = id;
-        this.login = login;
+        this.email = email;
         this.password = password;
     }
 
@@ -45,12 +45,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String login) {
+        this.email = login;
     }
 
     public String getPassword() {
@@ -69,7 +69,7 @@ public class User implements Serializable {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (!login.equals(user.login)) return false;
+        if (!email.equals(user.email)) return false;
         if (!password.equals(user.password)) return false;
 
         return true;
@@ -78,7 +78,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + login.hashCode();
+        result = 31 * result + email.hashCode();
         result = 31 * result + password.hashCode();
         return result;
     }
