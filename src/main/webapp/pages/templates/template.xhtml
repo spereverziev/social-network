@@ -3,16 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>Be my guest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <h:outputStylesheet library="css" name="main.css" />
-    <h:outputStylesheet library="css" name="index.css" />
+    <h:outputStylesheet library="css" name="template.css" />
     <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
-    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+    <h:outputScript library="js" name="jquery-1.10.2.min.js"/>
+    <h:outputScript library="js" name="bootstrap.js"/>
+    <h:outputScript library="js" name="bootstrap.min.js"/>
 </h:head>
 <h:body>
     <f:metadata>
@@ -20,31 +23,37 @@
     </f:metadata>
 
     <h:panelGroup>
-        <div class="navbar navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">be my guest</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav nav-pills navbar-left">
-                        <li class="active"><h:link value="Home" outcome="home"/> </li>
-                        <li><h:link value="Friends" outcome="friends" /> </li>
-                        <li><h:link value="Messages" outcome="friends" /> </li>
-                    </ul>
 
-                    <h:form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <h:inputText type="text" name="name" class="form-control" placeholder="Search"/>
-                        </div>
-                        <h:commandButton type="submit" value="Search" class="btn btn-default"/>
-                    </h:form>
+        <div class="container">
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
 
-                    <ul class="nav nav-pills navbar-right">
-                        <li><h:form><h:commandLink action="#{userSession.logout}" value="Logout"/></h:form></li>
-                    </ul>
+                        <a class="navbar-brand" href="#">let's improve your language</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav nav-pills">
+                            <li class="active"><h:link value="Home" outcome="home"/></li>
+                            <li><h:link value="Friends" outcome="friends"> <span class="badge badge-info"><h:outputText value="2"/></span></h:link></li>
+                            <li><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
+                            <li>
+                                <h:form class="navbar-form navbar-left" role="search">
+                                    <div class="form-group">
+                                        <h:inputText class="form-control" pt:placeholder="Find friend..."/>
+                                        <h:commandButton type="submit" value="Search" class="btn btn-info"/>
+                                    </div>
+                                </h:form>
+                            </li>
+                            <li class="disabled pull-right" style="margin-top: 10px">
+                                <h:form><h:commandLink action="#{userSession.logout}" value="Log out"/></h:form>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
     </h:panelGroup>
 
     <h:panelGroup id="content" layout="block">
