@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "avatars")
 public class Avatar implements java.io.Serializable {
-
     @Id
     @GeneratedValue
     private Integer avatarId;

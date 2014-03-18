@@ -3,16 +3,20 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/pages/templates/template.xhtml">
     <ui:define name="content">
+        <f:metadata>
+            <c:set var="user" value="#{viewPageBean.viewUser}"/>
+        </f:metadata>
         <div class="container">
             <div class="jumbotron">
                 <h1>
                     <h:graphicImage library="img" name="no_avatar.jpg" styleClass="img-thumbnail" alt=":)" />
-                    <h:outputText value="${userSession.user.account.firstName} ${userSession.user.account.lastName}"/>
+                    <h:outputText value="${user.account.firstName} ${user.account.lastName}"/>
                 </h1>
-                <p> <h:outputText value="${userSession.user.account.age} years old"/> </p>
-                <p> <h:outputText value="e-mail: ${userSession.user.account.email}"/> </p>
+                <p> <h:outputText value="${user.account.age} years old"/> </p>
+                <p> <h:outputText value="e-mail: ${user.account.email}"/> </p>
             </div>
         </div>
     </ui:define>
