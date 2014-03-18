@@ -24,6 +24,7 @@ public class UserSession implements Serializable {
 
     private User user;
 
+
     public void logout() {
         user = null;
     }

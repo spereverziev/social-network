@@ -20,6 +20,7 @@
 <h:body>
     <f:metadata>
         <f:event type="preRenderView" listener="#{homeBean.init}" />
+        <f:viewParam name="userId" value="#{homeBean.userId}" />
     </f:metadata>
 
     <h:panelGroup>
@@ -28,14 +29,13 @@
             <div class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
-
                         <a class="navbar-brand" href="#">let's improve your language</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav nav-pills">
-                            <li class="active"><h:link value="Home" outcome="home"/></li>
-                            <li><h:link value="Friends" outcome="friends"> <span class="badge badge-info"><h:outputText value="2"/></span></h:link></li>
-                            <li><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
+                            <li class=""><h:link value="Home" outcome="home"/></li>
+                            <li class=""><h:link value="Friends" outcome="friends"> <span class="badge badge-info"><h:outputText value="2"/></span></h:link></li>
+                            <li class=""><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
                             <li>
                                 <h:form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">

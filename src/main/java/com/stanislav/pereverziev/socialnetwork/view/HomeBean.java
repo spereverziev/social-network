@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -21,6 +22,10 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class HomeBean implements Serializable {
+
+    private Map<String, String> params = FacesContext.getCurrentInstance().
+            getExternalContext().getRequestParameterMap();
+    private String userId = params.get("userId");
 
     @Inject
     private UserSession userSession;
@@ -40,5 +45,13 @@ public class HomeBean implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

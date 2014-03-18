@@ -55,7 +55,11 @@ public class LoginBean implements Serializable {
         } else {
             try {
                 User user = userDao.findUserByEmail(email);
-                userSession.setUser(user);
+                if (password.equals(user.getPassword())) {
+                    userSession.setUser(user);
+                } else {
+                    FacesUtil.addError("Incorrect password");
+                }
                 return "/pages/home.jsf";
             } catch (SQLException e) {
                 FacesUtil.addError("SQL Error");

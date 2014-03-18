@@ -22,9 +22,12 @@
                 <div class="panel-collapse">
                     <h:form>
                         <h4>
-                            <h:outputText value="${friend.account.firstName}"/>
-                            <h:outputText value=" "/>
-                            <h:outputText value="${friend.account.lastName}"/>
+                            <h:link outcome="home">
+                                <f:param name="userId" value="${friend.id}" />
+                                <h:outputText value="${friend.account.firstName}"/>
+                                <h:outputText value=" "/>
+                                <h:outputText value="${friend.account.lastName}"/>
+                            </h:link>
                         </h4>
                         <h:commandButton  value="Send Message" class="btn btn-success" type="submit"/>
                         <h:outputText value=" "/>
