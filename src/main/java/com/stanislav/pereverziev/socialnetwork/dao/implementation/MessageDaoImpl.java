@@ -1,12 +1,13 @@
 package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 
+import com.stanislav.pereverziev.socialnetwork.dao.MessageDao;
 import com.stanislav.pereverziev.socialnetwork.entity.Message;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/5/13
  */
-public class MessageDao extends DataAccessObject implements com.stanislav.pereverziev.socialnetwork.dao.MessageDao {
+public class MessageDaoImpl implements MessageDao {
     @Override
     public void addMessage(int from_user, int to_user, String text) {
         //To change body of implemented methods use File | Settings | File Templates.

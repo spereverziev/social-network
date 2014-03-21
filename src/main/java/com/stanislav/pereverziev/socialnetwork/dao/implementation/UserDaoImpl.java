@@ -4,22 +4,36 @@ import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 
 import javax.inject.Named;
-import java.io.Serializable;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/29/13
  */
 @Named
-public class UserDaoImpl extends DataAccessObject implements UserDao,Serializable {
+public class UserDaoImpl implements UserDao {
+    private EntityManagerFactory factory;
+    private EntityManager entityManager;
+
     public UserDaoImpl() {
+        factory = Persistence.createEntityManagerFactory("jdbc/social-network");
+        entityManager = factory.createEntityManager();
     }
 
     @Override
     public void addUser(User user) throws SQLException {
         entityManager.merge(user);
+    }
+
+    @Override
+    public void updateUser(User user) throws SQLException {
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -30,10 +44,5 @@ public class UserDaoImpl extends DataAccessObject implements UserDao,Serializabl
     @Override
     public User findUserByEmail(String email) throws SQLException {
         return (User) entityManager.createNamedQuery("findByLogin").setParameter("email", email).getSingleResult();
-    }
-
-    @Override
-    public List findAll() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -4,6 +4,10 @@ import com.stanislav.pereverziev.socialnetwork.dao.AccountDao;
 import com.stanislav.pereverziev.socialnetwork.entity.Account;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,9 +15,14 @@ import java.util.List;
  * User: Stanislav.Pereverziev
  * Date: 10/3/13
  */
-public class AccountDaoImpl extends DataAccessObject implements AccountDao {
+@Named
+public class AccountDaoImpl  implements AccountDao {
+    private EntityManagerFactory factory;
+    private EntityManager entityManager;
 
     public AccountDaoImpl() {
+        factory = Persistence.createEntityManagerFactory("jdbc/social-network");
+        entityManager = factory.createEntityManager();
     }
 
     @Override

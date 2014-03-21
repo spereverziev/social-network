@@ -6,7 +6,7 @@ import com.stanislav.pereverziev.socialnetwork.dao.FriendsRequestsDao;
  * User: Stanislav.Pereverziev
  * Date: 10/13/13
  */
-public class FriendsRequestsDaoImpl extends DataAccessObject implements FriendsRequestsDao {
+public class FriendsRequestsDaoImpl  implements FriendsRequestsDao {
 
     public FriendsRequestsDaoImpl() {
 

@@ -17,22 +17,25 @@
                 </li>
             </ul>
 
-            <h3>You have  #{fn:length(userSession.user.account.friendsRequests)} friends requests:</h3>
+            <h3>You have  #{fn:length(friendsController.newFriendsRequests)} friends requests:</h3>
 
-            <ui:repeat value="${userSession.user.account.friendsRequests}" var="friendsRequest">
+            <ui:repeat value="${friendsController.newFriendsRequests}" var="friendsRequest">
                 <div class="panel-collapse">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Artem Kondratow want </h3>
+                            <h3 class="panel-title">Some message </h3>
                         </div>
                         <div class="panel-body">
                             <h:form>
                                 <h4>
-                                    <h:outputText value="${friendsRequest.sender.account.firstName}"/>
+                                    <h:outputText value="${friendsRequest.account.firstName}"/>
                                     <h:outputText value=" "/>
-                                    <h:outputText value="${friendsRequest.sender.account.lastName}"/>
+                                    <h:outputText value="${friendsRequest.account.lastName}"/>
                                 </h4>
-                                <h:commandButton  value="Accept" class="btn btn-success" type="submit"/>
+                                <h:commandButton  value="Accept" action="${friendsController.addFriend}" class="btn btn-success" type="submit">
+                                    <f:param name="newFriendId" value="${friendsRequest.id}" />
+                                    <!--<f:param name="requestNumber" value="#{friendsRequest}"-->
+                                </h:commandButton>
                                 <h:outputText value=" "/>
                                 <h:commandButton class="btn btn-danger" type="submit" value="Dismiss"/>
                             </h:form>

@@ -1,5 +1,7 @@
 package com.stanislav.pereverziev.socialnetwork.entity;
 
+import com.stanislav.pereverziev.socialnetwork.entity.friendRequest.FriendsRequest;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
