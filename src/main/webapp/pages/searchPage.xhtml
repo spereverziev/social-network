@@ -8,23 +8,28 @@
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <ui:define name="content">
         <div class="container">
-            <ui:repeat value="${userSession.user.account.friends}" var="friend">
+            <ui:repeat value="#{searchBean.searchResult}" var="account">
                 <div class="panel-collapse">
                     <h:form>
                         <h4>
                             <h:link outcome="viewPage">
-                                <f:param name="userId" value="${friend.id}" />
-                                <h:outputText value="${friend.account.firstName}"/>
+                                <f:param name="userId" value="${account.user.id}" />
+                                <h:outputText value="${account.firstName}"/>
                                 <h:outputText value=" "/>
-                                <h:outputText value="${friend.account.lastName}"/>
+                                <h:outputText value="${account.lastName}"/>
                             </h:link>
                         </h4>
-                        <h:commandButton  value="Send Message" class="btn btn-success" type="submit"/>
+                        <h:commandButton  value="Add to friends" class="btn btn-success" type="submit"/>
                         <h:outputText value=" "/>
-                        <h:commandButton class="btn btn-danger" type="submit" value="Remove"/>
+                        <h:commandButton class="btn btn-danger" type="submit" value="Send Message"/>
                     </h:form>
                 </div>
             </ui:repeat>
+
+            <ui:fragment rendered="#{fn:length(searchBean.searchResult) eq 0}">
+                No one with such name has been found.
+            </ui:fragment>
+
         </div>
     </ui:define>
 </ui:composition>

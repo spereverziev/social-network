@@ -4,15 +4,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
     <title>Be my guest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <h:outputStylesheet library="css" name="template.css" />
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
-    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
-    <h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
     <h:outputScript library="js" name="jquery-1.10.2.min.js"/>
     <h:outputScript library="js" name="bootstrap.js"/>
     <h:outputScript library="js" name="bootstrap.min.js"/>
@@ -33,10 +32,16 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav nav-pills">
                             <li class=""><h:link value="Home" outcome="home"/></li>
-                            <li class=""><h:link value="Friends" outcome="friends"> <span class="badge badge-info"><h:outputText value="2"/></span></h:link></li>
+                            <li class="">
+                                <h:link value="Friends" outcome="friends">
+                                    <ui:fragment rendered="#{fn:length(friendsController.newFriendsRequests) ne 0}">
+                                        <span class="badge badge-info"><h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
+                                    </ui:fragment>
+                            </h:link>
+                            </li>
                             <li class=""><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
                             <li>
-                                <h:form class="navbar-form navbar-left" role="search">
+                                <h:form class="navbar-form navbar-left">
                                     <div class="form-group">
                                         <h:inputText class="form-control" value="#{searchBean.searchField}" pt:placeholder="Find friend..."/>
                                         <h:commandButton type="submit" value="Search" action="#{searchBean.search}" class="btn btn-info"/>

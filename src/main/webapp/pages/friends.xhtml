@@ -14,19 +14,23 @@
                     <h:link value="Friends" outcome="friends"/>
                 </li>
                 <li >
-                    <h:link value="New Requests" outcome="friendsRequests"> <span class="badge badge-info"><h:outputText value="1"/> </span> </h:link>
+                    <h:link value="New Requests" outcome="friendsRequests">
+                        <ui:fragment rendered="#{fn:length(friendsController.newFriendsRequests) ne 0}">
+                            <span class="badge badge-info"><h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
+                        </ui:fragment>
+                    </h:link>
                 </li>
             </ul>
 
-            <ui:repeat value="${userSession.user.account.friends}" var="friend">
+            <ui:repeat value="${userSession.user.account.friends}" var="user">
                 <div class="panel-collapse">
                     <h:form>
                         <h4>
                             <h:link outcome="viewPage">
-                                <f:param name="userId" value="${friend.id}" />
-                                <h:outputText value="${friend.account.firstName}"/>
+                                <f:param name="userId" value="${user.id}" />
+                                <h:outputText value="${user.account.firstName}"/>
                                 <h:outputText value=" "/>
-                                <h:outputText value="${friend.account.lastName}"/>
+                                <h:outputText value="${user.account.lastName}"/>
                             </h:link>
                         </h4>
                         <h:commandButton  value="Send Message" class="btn btn-success" type="submit"/>

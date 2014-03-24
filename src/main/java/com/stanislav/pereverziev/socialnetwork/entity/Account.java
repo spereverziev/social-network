@@ -13,7 +13,11 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "findByUser",query = "from Account account where account.user = :user"),
         @NamedQuery(name = "findByName",
-                query = "from Account account where concat(account.firstName,account.lastName) like :name")
+                query = "from Account account where concat(account.firstName,account.lastName) like :name"),
+        @NamedQuery(name = "findByFirstName",
+                query = "from Account account where account.firstName like :firstName"),
+        @NamedQuery(name = "findByLastName",
+                query = "from Account account where account.lastName like :lastName"),
 })
 public class Account implements Serializable {
     @Id

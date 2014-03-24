@@ -42,6 +42,19 @@ public class AccountDaoImpl  implements AccountDao {
     }
 
     @Override
+    public List findAccountsByFirstName(String name) throws SQLException {
+        List<Account> accounts = entityManager.createNamedQuery("findByFirstName").setParameter("firstName",name).getResultList();
+        return accounts;
+    }
+
+    @Override
+    public List findAccountsByLastName(String name) throws SQLException {
+        List<Account> accounts = entityManager.createNamedQuery("findByLastName").setParameter("lastName",name).getResultList();
+        return accounts;
+    }
+
+
+    @Override
     public List findAll() {
         return null;
     }
