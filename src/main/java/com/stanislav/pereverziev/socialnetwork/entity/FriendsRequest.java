@@ -1,8 +1,4 @@
-package com.stanislav.pereverziev.socialnetwork.entity.friendRequest;
-
-import com.stanislav.pereverziev.socialnetwork.entity.Account;
-import com.stanislav.pereverziev.socialnetwork.entity.RequestStatus;
-import com.stanislav.pereverziev.socialnetwork.entity.User;
+package com.stanislav.pereverziev.socialnetwork.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,14 +16,14 @@ public class FriendsRequest implements Serializable{
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "from_user")
+    @JoinColumn(name = "sender_id")
     private User sender;
 
     @OneToOne
-    @JoinColumn(name = "to_user")
+    @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    @Column(name = "is_accepted")
+    @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

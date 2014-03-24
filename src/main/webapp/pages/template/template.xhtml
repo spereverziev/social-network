@@ -38,8 +38,8 @@
                             <li>
                                 <h:form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
-                                        <h:inputText class="form-control" pt:placeholder="Find friend..."/>
-                                        <h:commandButton type="submit" value="Search" class="btn btn-info"/>
+                                        <h:inputText class="form-control" value="#{searchBean.searchField}" pt:placeholder="Find friend..."/>
+                                        <h:commandButton type="submit" value="Search" action="#{searchBean.search}" class="btn btn-info"/>
                                     </div>
                                 </h:form>
                             </li>

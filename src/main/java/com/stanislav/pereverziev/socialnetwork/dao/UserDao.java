@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public interface UserDao {
     void addUser(User user) throws SQLException;
-    void updateUser(User user) throws SQLException;
+    void updateUserFriends(User user) throws SQLException;
     User findUserById(int userId) throws SQLException;
     User findUserByEmail(String email) throws SQLException;
 }

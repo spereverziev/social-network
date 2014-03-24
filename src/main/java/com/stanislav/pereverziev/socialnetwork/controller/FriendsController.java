@@ -1,8 +1,9 @@
 package com.stanislav.pereverziev.socialnetwork.controller;
 
+import com.stanislav.pereverziev.socialnetwork.dao.FriendsDao;
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
+import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.entity.RequestStatus;
-import com.stanislav.pereverziev.socialnetwork.entity.friendRequest.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.util.FacesUtil;
 import com.stanislav.pereverziev.socialnetwork.view.UserSession;
@@ -26,10 +27,10 @@ public class FriendsController implements Serializable {
     private UserDao userDao;
     @Inject
     private UserSession userSession;
-    
-    public List<User> newFriendsRequests;
+    @Inject
+    private FriendsDao friendsDao;
 
-    public String  addFriend() {
+    public void addFriend() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String friendId = params.get("newFriendId");
         User user = userSession.getUser();
@@ -39,16 +40,25 @@ public class FriendsController implements Serializable {
             User newFriend = userDao.findUserById(Integer.valueOf(friendId));
             if (!friends.contains(newFriend)) {
                 friends.add(newFriend);
-                userDao.updateUser(user);
+                changeRequestStatus(friendsRequests, newFriend.getId(), RequestStatus.ACCEPTED);
+                friendsDao.addFriend(user.getAccount().getId(),newFriend.getId());
+
             } else {
                 FacesUtil.addError("Constraint validation. User already in your friends list.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "/pages/friends.xhtml";
     }
 
+    private void changeRequestStatus(List<FriendsRequest> friendsRequests, int senderId, RequestStatus requestStatus) {
+        for (FriendsRequest friendsRequest : friendsRequests) {
+            if (friendsRequest.getSender().getId() == senderId) {
+                friendsRequest.setStatus(requestStatus);
+                friendsDao.updateFriendsRequestStatus(friendsRequest,requestStatus);
+            }
+        }
+    }
 
     public List<User> getNewFriendsRequests() {
         List<FriendsRequest> friendsRequests = userSession.getUser().getAccount().getFriendsRequests();

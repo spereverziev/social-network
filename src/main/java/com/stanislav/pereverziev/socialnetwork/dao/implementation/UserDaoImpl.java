@@ -1,6 +1,7 @@
 package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
+import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
 
 import javax.inject.Named;
@@ -29,11 +30,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user) throws SQLException {
-        entityManager.getTransaction().begin();
-        entityManager.merge(user);
-        entityManager.flush();
-        entityManager.getTransaction().commit();
+    public void updateUserFriends(User user) throws SQLException {
+        User toUpdateUser = entityManager.find(User.class, user.getId());
+        toUpdateUser.getAccount().setFriends(user.getAccount().getFriends());
+        toUpdateUser.getAccount().setFriendsRequests(user.getAccount().getFriendsRequests());
+        entityManager.merge(toUpdateUser);
+    }
+
+    public void updateFriendsRequest(FriendsRequest friendsRequest) {
+        FriendsRequest request = entityManager.find(FriendsRequest.class, friendsRequest.getId());
+
     }
 
     @Override
