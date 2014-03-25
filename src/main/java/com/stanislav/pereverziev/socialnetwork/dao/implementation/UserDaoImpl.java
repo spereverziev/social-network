@@ -3,6 +3,7 @@ package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
 import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
+import com.stanislav.pereverziev.socialnetwork.util.DAOUtil;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -16,12 +17,10 @@ import java.sql.SQLException;
  */
 @Named
 public class UserDaoImpl implements UserDao {
-    private EntityManagerFactory factory;
     private EntityManager entityManager;
 
     public UserDaoImpl() {
-        factory = Persistence.createEntityManagerFactory("jdbc/social-network");
-        entityManager = factory.createEntityManager();
+        entityManager = DAOUtil.getEntityManagerFactory().createEntityManager();
     }
 
     @Override

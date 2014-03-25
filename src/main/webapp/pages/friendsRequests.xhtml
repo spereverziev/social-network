@@ -36,11 +36,13 @@
                                     <h:outputText value=" "/>
                                     <h:outputText value="${friendsRequest.account.lastName}"/>
                                 </h4>
-                                <h:commandButton  value="Accept" action="${friendsController.addFriend}" class="btn btn-success" type="submit">
+                                <h:commandButton  value="Accept" action="${friendsController.acceptRequest}" class="btn btn-success" type="submit">
                                     <f:param name="newFriendId" value="${friendsRequest.id}" />
                                 </h:commandButton>
                                 <h:outputText value=" "/>
-                                <h:commandButton class="btn btn-danger" type="submit" value="Dismiss"/>
+                                <h:commandButton class="btn btn-danger" action="${friendsController.dismissRequest}" type="submit" value="Dismiss">
+                                    <f:param name="newFriendId" value="${friendsRequest.id}" />
+                                </h:commandButton>
                             </h:form>
                         </div>
                     </div>

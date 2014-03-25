@@ -30,9 +30,8 @@ public class FriendsController implements Serializable {
     @Inject
     private FriendsDao friendsDao;
 
-    public void addFriend() {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String friendId = params.get("newFriendId");
+    public void acceptRequest() {
+        String friendId = getParameter("newFriendId");
         User user = userSession.getUser();
         List<User> friends = user.getAccount().getFriends();
         List<FriendsRequest> friendsRequests = user.getAccount().getFriendsRequests();
@@ -50,6 +49,19 @@ public class FriendsController implements Serializable {
             e.printStackTrace();
         }
     }
+
+    private String getParameter(String param) {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        return params.get(param);
+    }
+
+    public void dismissRequest() {
+        String friendId = getParameter("newFriendId");
+        List<FriendsRequest> friendsRequests = userSession.getUser().getAccount().getFriendsRequests();
+
+        changeRequestStatus(friendsRequests, Integer.valueOf(friendId), RequestStatus.DISMISSED);
+    }
+
 
     private void changeRequestStatus(List<FriendsRequest> friendsRequests, int senderId, RequestStatus requestStatus) {
         for (FriendsRequest friendsRequest : friendsRequests) {

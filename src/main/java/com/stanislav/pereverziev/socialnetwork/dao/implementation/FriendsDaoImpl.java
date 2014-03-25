@@ -3,11 +3,10 @@ package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 import com.stanislav.pereverziev.socialnetwork.dao.FriendsDao;
 import com.stanislav.pereverziev.socialnetwork.entity.FriendsRequest;
 import com.stanislav.pereverziev.socialnetwork.entity.RequestStatus;
+import com.stanislav.pereverziev.socialnetwork.util.DAOUtil;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -15,12 +14,10 @@ import javax.persistence.Persistence;
  */
 @Named
 public class FriendsDaoImpl implements FriendsDao {
-    private EntityManagerFactory factory;
     private EntityManager entityManager;
 
     public FriendsDaoImpl() {
-        factory = Persistence.createEntityManagerFactory("jdbc/social-network");
-        entityManager = factory.createEntityManager();
+        entityManager = DAOUtil.getEntityManagerFactory().createEntityManager();
     }
 
     @Override
