@@ -23,6 +23,10 @@
     <listener>
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
+    <context-param>
+        <param-name>org.apache.myfaces.EXPRESSION_FACTORY</param-name>
+        <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+    </context-param>
     <resource-env-ref>
         <description>Object factory for the CDI Bean Manager</description>
         <resource-env-ref-name>BeanManager</resource-env-ref-name>

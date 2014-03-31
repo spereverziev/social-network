@@ -20,18 +20,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>2.1.2-b05</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>2.0.14</version>
@@ -95,8 +83,14 @@
             <scope>compile</scope>
         </dependency>
 
-
+        <!--EL 2-->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>2.2</version>
+        </dependency>
     </dependencies>
+
     <build>
         <finalName>social-network</finalName>
         <plugins>
@@ -110,6 +104,7 @@
                     <compilerArgument>-Aopenjpa.metamodel=true -Aopenjpa.log=TRACE</compilerArgument>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
@@ -134,7 +129,6 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-
                 </configuration>
             </plugin>
     </plugins>
@@ -157,7 +151,38 @@
                 <war.manifest.classpath />
                 <system.path>target</system.path>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>maven-jetty-plugin</artifactId>
+                        <version>6.1.26</version>
+                        <configuration>
+                            <scanIntervalSeconds>0</scanIntervalSeconds>
+                            <connectors>
+                                <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                                    <port>8888</port>
+                                    <maxIdleTime>60000</maxIdleTime>
+                                </connector>
+                            </connectors>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.eclipse.jetty</groupId>
+                                <artifactId>jetty-client</artifactId>
+                                <version>9.0.4.v20130625</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.glassfish.web</groupId>
+                                <artifactId>el-impl</artifactId>
+                                <version>2.2</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
+
     </profiles>
 
 </project>

@@ -9,6 +9,7 @@
     <ui:define name="content">
         <div class="container">
             <ui:repeat value="#{searchBean.searchResult}" var="account">
+                <c:set var="searchUserId" value="${account.user.id}" scope="request"/>
                 <div class="panel-collapse">
                     <h:form>
                         <h4>
@@ -19,9 +20,20 @@
                                 <h:outputText value="${account.lastName}"/>
                             </h:link>
                         </h4>
-                        <h:commandButton  value="Add to friends" class="btn btn-success" type="submit"/>
-                        <h:outputText value=" "/>
-                        <h:commandButton class="btn btn-danger" type="submit" value="Send Message"/>
+                        <ui:fragment rendered="#{!friendsController.isFriend(account.user.id) and !friendsController.isSentFriendsRequest(account.user.id)}">
+                            <h:commandButton  value="Add to friends" class="btn btn-success" type="submit"/>
+                            <h:outputText value=" "/>
+                            <h:commandButton class="btn btn-danger" type="submit" value="Send Message"/>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{friendsController.isFriend(account.user.id)}">
+                            <h:commandButton  value="Send Message" class="btn btn-success" type="submit"/>
+                            <h:outputText value=" "/>
+                            <h:commandButton class="btn btn-danger" type="submit" value="Remove"/>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{friendsController.isSentFriendsRequest(account.user.id)}">
+                            <p class="bg-info">You sent a friend request. </p>
+                            <h:commandButton class="btn btn-danger" type="submit" value="Delete request"/>
+                        </ui:fragment>
                     </h:form>
                 </div>
             </ui:repeat>

@@ -8,6 +8,7 @@ package com.stanislav.pereverziev.socialnetwork.util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Map;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -24,4 +25,10 @@ public class FacesUtil {
 
         FacesContext.getCurrentInstance().addMessage(compId, msg);
     }
+
+    public static String getParameter(String parameter) {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        return params.get(parameter);
+    }
+
 }

@@ -7,6 +7,8 @@ import com.stanislav.pereverziev.socialnetwork.util.DAOUtil;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -37,5 +39,17 @@ public class FriendsDaoImpl implements FriendsDao {
         request.setStatus(requestStatus);
         entityManager.merge(request);
     }
+
+    @Override
+    public List<FriendsRequest> getSentFriendsRequests(int senderId) {
+        TypedQuery<FriendsRequest> query =
+                entityManager.createQuery("SELECT fr FROM FriendsRequest fr WHERE fr.sender.id = :senderId", FriendsRequest.class);
+        query.setParameter("senderId", senderId);
+
+        List<FriendsRequest> results = query.getResultList();
+
+        return results;
+    }
+
 
 }

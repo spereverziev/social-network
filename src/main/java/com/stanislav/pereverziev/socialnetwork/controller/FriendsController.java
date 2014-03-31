@@ -8,14 +8,12 @@ import com.stanislav.pereverziev.socialnetwork.entity.User;
 import com.stanislav.pereverziev.socialnetwork.util.FacesUtil;
 import com.stanislav.pereverziev.socialnetwork.view.UserSession;
 
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -31,7 +29,7 @@ public class FriendsController implements Serializable {
     private FriendsDao friendsDao;
 
     public void acceptRequest() {
-        String friendId = getParameter("newFriendId");
+        String friendId = FacesUtil.getParameter("newFriendId");
         User user = userSession.getUser();
         List<User> friends = user.getAccount().getFriends();
         List<FriendsRequest> friendsRequests = user.getAccount().getFriendsRequests();
@@ -50,16 +48,41 @@ public class FriendsController implements Serializable {
         }
     }
 
-    private String getParameter(String param) {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        return params.get(param);
+    public void dismissRequest() {
+        String friendId = FacesUtil.getParameter("newFriendId");
+        List<FriendsRequest> friendsRequests = userSession.getUser().getAccount().getFriendsRequests();
+        changeRequestStatus(friendsRequests, Integer.valueOf(friendId), RequestStatus.DISMISSED);
     }
 
-    public void dismissRequest() {
-        String friendId = getParameter("newFriendId");
-        List<FriendsRequest> friendsRequests = userSession.getUser().getAccount().getFriendsRequests();
+    public boolean isFriend(String searchUserId) {
+        List<User> friends = userSession.getUser().getAccount().getFriends();
+        try {
+            User searchUser = userDao.findUserById(Integer.valueOf(searchUserId));
+            if (friends.contains(searchUser)) {
+                return true;
+            }
+        } catch (SQLException e) {
+            FacesUtil.addError("SQL Error");
+            e.printStackTrace();
+        }
+        return false;
+    }
 
-        changeRequestStatus(friendsRequests, Integer.valueOf(friendId), RequestStatus.DISMISSED);
+    public boolean booleanTest(String test) {
+        return false;
+    }
+
+    public boolean isSentFriendsRequest(String searchUserId) {
+        List<FriendsRequest> sentFriendsRequests = friendsDao.getSentFriendsRequests(userSession.getUser().getId());
+        for (FriendsRequest sentFriendsRequest : sentFriendsRequests) {
+            if (Integer.valueOf(searchUserId) == sentFriendsRequest.getReceiver().getId()) {
+                if (sentFriendsRequest.getStatus().equals(RequestStatus.NEW)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 
