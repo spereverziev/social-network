@@ -31,15 +31,15 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav nav-pills">
-                            <li class=""><h:link value="Home" outcome="home"/></li>
-                            <li class="">
+                            <li class="#{homeBean.retrieveActiveStyle('home')}"><h:link value="Home" outcome="home"/></li>
+                            <li class="#{homeBean.retrieveActiveStyle('friends')}">
                                 <h:link value="Friends" outcome="friends">
                                     <ui:fragment rendered="#{fn:length(friendsController.newFriendsRequests) ne 0}">
-                                        <span class="badge badge-info"><h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
+                                        <span class="badge badge-info">+<h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
                                     </ui:fragment>
                             </h:link>
                             </li>
-                            <li class=""><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
+                            <li class="#{homeBean.retrieveActiveStyle('message')}"><h:link value="Messages" outcome="message"> <span class="badge badge-info"><h:outputText value="8"/> </span></h:link></li>
                             <li>
                                 <h:form class="navbar-form navbar-left">
                                     <div class="form-group">

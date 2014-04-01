@@ -6,10 +6,6 @@
  */
 package com.stanislav.pereverziev.socialnetwork.view;
 
-import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
-import com.stanislav.pereverziev.socialnetwork.entity.User;
-import com.stanislav.pereverziev.socialnetwork.util.FacesUtil;
-
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,8 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -46,4 +40,15 @@ public class HomeBean implements Serializable {
             }
         }
     }
+
+    public String retrieveActiveStyle(String link) {
+        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        link = "/pages/" + link + ".xhtml";
+        if (link.equals(viewId)) {
+            return "active";
+        }
+        return "";
+
+    }
+
 }

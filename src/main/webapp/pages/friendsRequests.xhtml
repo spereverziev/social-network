@@ -15,7 +15,7 @@
                 <li class="active">
                     <h:link value="New Requests" outcome="friendsRequests">
                         <ui:fragment rendered="#{fn:length(friendsController.newFriendsRequests) ne 0}">
-                            <span class="badge badge-info"><h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
+                            <span class="badge badge-info">+<h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
                         </ui:fragment>
                     </h:link>
                 </li>
