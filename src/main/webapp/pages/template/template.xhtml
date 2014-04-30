@@ -3,15 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
     <title>Be my guest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <h:outputStylesheet library="css" name="template.css" />
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="/bootstrap/bootstrap.css" />
+    <h:outputStylesheet library="css" name="/bootstrap/bootstrap.min.css" />
     <h:outputScript library="js" name="jquery-1.10.2.min.js"/>
     <h:outputScript library="js" name="bootstrap.js"/>
     <h:outputScript library="js" name="bootstrap.min.js"/>
@@ -32,7 +34,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav nav-pills">
                             <li class="#{homeBean.retrieveActiveStyle('home')}"><h:link value="Home" outcome="home"/></li>
-                            <li class="#{homeBean.retrieveActiveStyle('friends')}">
+                            <li class="#{homeBean.retrieveActiveStyle('friends')} #{homeBean.retrieveActiveStyle('friendsRequests')}">
                                 <h:link value="Friends" outcome="friends">
                                     <ui:fragment rendered="#{fn:length(friendsController.newFriendsRequests) ne 0}">
                                         <span class="badge badge-info">+<h:outputText value="#{fn:length(friendsController.newFriendsRequests)}"/></span>
