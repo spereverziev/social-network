@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+
+            <rich:popupPanel id="popup" modal="true" styleClass="modal-content" autosized="true" resizeable="false">
+                <f:facet name="header" >
+                    <h4>Sending message...</h4>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:outputLink styleClass="close" onclick="#{rich:component('popup')}.hide(); return false;">
+                        x
+                    </h:outputLink>
+                </f:facet>
+                <div id="modal-body">
+                    To: <span class="label label-default"> <h:outputText value="#{messageBean.receiver}"/> </span> <br/> <br/>
+                    <h:inputTextarea cols="65" rows="10" value="#{messageBean.message}"/>
+                </div>
+
+                <div class="modal-footer">
+                    <h:commandButton onclick="#{rich:component('popup')}.hide(); return false;" styleClass="btn btn-default" value="Cancel"/>
+                    <h:commandButton styleClass="btn btn-primary" value="Send" data-dismiss="modal"/>
+                </div>
+            </rich:popupPanel>
+
+</ui:composition>

@@ -11,7 +11,6 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * User: Stanislav.Pereverziev
@@ -25,9 +24,7 @@ public class ViewPageBean implements Serializable {
     private UserDao userDao;
 
     public User getViewUser() {
-        Map<String, String> params = FacesContext.getCurrentInstance().
-                getExternalContext().getRequestParameterMap();
-        String userId = params.get("userId");
+        String userId = FacesUtil.getParameter("userId");
         User user = null;
         if (userId != null) {
             try {

@@ -68,10 +68,6 @@ public class FriendsController implements Serializable {
         return false;
     }
 
-    public boolean booleanTest(String test) {
-        return false;
-    }
-
     public boolean isSentFriendsRequest(String searchUserId) {
         List<FriendsRequest> sentFriendsRequests = friendsDao.getSentFriendsRequests(userSession.getUser().getId());
         for (FriendsRequest sentFriendsRequest : sentFriendsRequests) {

@@ -20,10 +20,6 @@ import java.util.List;
 public class SearchBean {
     @Inject
     private UserSession userSession;
-
-    @Inject
-    private AccountDao accountDao;
-
     @Inject
     private SearchController searchController;
 

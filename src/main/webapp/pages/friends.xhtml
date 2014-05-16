@@ -35,6 +35,7 @@
                             </h:link>
                         </h4>
                         <h:commandButton  value="Send Message" class="btn btn-success">
+                            <f:param name="receiverId" value="#{user.id}" />
                             <rich:componentControl target="popup" operation="show" />
                         </h:commandButton>
                         <h:outputText value=" "/>
@@ -43,25 +44,7 @@
                 </div>
             </ui:repeat>
 
-            <rich:popupPanel id="popup" modal="true" styleClass="modal-content" autosized="true" resizeable="false">
-                <f:facet name="header" >
-                    <h4>Sending message...</h4>
-                </f:facet>
-                <f:facet name="controls">
-                    <h:outputLink styleClass="close" onclick="#{rich:component('popup')}.hide(); return false;">
-                        x
-                    </h:outputLink>
-                </f:facet>
-                <div id="modal-body">
-                    To: <span class="label label-default"> Artem Kondratov </span> <br/> <br/>
-                    <h:inputTextarea cols="65" rows="10"/>
-                </div>
-
-                <div class="modal-footer">
-                    <h:commandButton onclick="#{rich:component('popup')}.hide(); return false;" styleClass="btn btn-default" value="Cancel"/>
-                    <h:commandButton styleClass="btn btn-primary" value="Send" data-dismiss="modal"/>
-                </div>
-            </rich:popupPanel>
+            <ui:include src="popup/sendMessagePopup.xhtml"/>
 
         </div>
     </ui:define>
