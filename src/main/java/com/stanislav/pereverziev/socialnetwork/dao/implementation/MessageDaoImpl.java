@@ -2,14 +2,23 @@ package com.stanislav.pereverziev.socialnetwork.dao.implementation;
 
 import com.stanislav.pereverziev.socialnetwork.dao.MessageDao;
 import com.stanislav.pereverziev.socialnetwork.entity.Message;
+import com.stanislav.pereverziev.socialnetwork.util.DAOUtil;
+
+import javax.persistence.EntityManager;
 
 /**
  * User: Stanislav.Pereverziev
  * Date: 10/5/13
  */
 public class MessageDaoImpl implements MessageDao {
+    private EntityManager entityManager;
+
+    public  MessageDaoImpl() {
+        entityManager = DAOUtil.getEntityManagerFactory().createEntityManager();
+    }
+
     @Override
-    public void addMessage(int from_user, int to_user, String text) {
+    public void addMessage(Message message) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

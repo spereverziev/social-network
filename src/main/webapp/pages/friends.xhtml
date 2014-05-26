@@ -4,6 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="/pages/template/template.xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions">
@@ -34,17 +35,22 @@
                                 <h:outputText value="${user.account.lastName}"/>
                             </h:link>
                         </h4>
-                        <h:commandButton  value="Send Message" class="btn btn-success">
+                        <a4j:commandButton value="Send Message"
+                                           styleClass="btn btn-success"
+                                           render="new-message-popup"
+                                           oncomplete="#{rich:component('popup')}.show()"
+                                           execute="@this">
                             <f:param name="receiverId" value="#{user.id}" />
-                            <rich:componentControl target="popup" operation="show" />
-                        </h:commandButton>
+                        </a4j:commandButton>
                         <h:outputText value=" "/>
                         <h:commandButton class="btn btn-danger" type="submit" value="Remove"/>
                     </h:form>
                 </div>
             </ui:repeat>
 
-            <ui:include src="popup/sendMessagePopup.xhtml"/>
+            <a4j:outputPanel id="new-message-popup">
+                <ui:include src="popup/sendMessagePopup.xhtml"/>
+            </a4j:outputPanel>
 
         </div>
     </ui:define>

@@ -1,14 +1,13 @@
 package com.stanislav.pereverziev.socialnetwork.view;
 
+import com.stanislav.pereverziev.socialnetwork.controller.MessageController;
 import com.stanislav.pereverziev.socialnetwork.dao.UserDao;
 import com.stanislav.pereverziev.socialnetwork.entity.User;
-import com.stanislav.pereverziev.socialnetwork.util.FacesUtil;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.sql.SQLException;
 
 /**
  * Created by e212232 (Stanislav Pereverziev) .
@@ -23,18 +22,9 @@ public class MessageBean implements Serializable {
     @Inject
     private UserDao userDao;
 
-    public User retrieveReceiver() {
-        String receiverId = FacesUtil.getParameter("receiverId");
-        if (receiverId == null) {
-            return null;
-        }
-        try {
-            return userDao.findUserById(Integer.valueOf(receiverId));
-        } catch (SQLException e) {
-            FacesUtil.addError("No such user");
-        }
-        return null;
-    }
+    @Inject
+    private MessageController messageController;
+
 
     public String getMessage() {
         return message;
@@ -48,11 +38,16 @@ public class MessageBean implements Serializable {
         if (receiver != null) {
             return receiver;
         } else {
-            return retrieveReceiver();
+            return messageController.retrieveReceiver();
         }
     }
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;
+    }
+
+
+    public void sendMessage() {
+        messageController.sendMessage(message,receiver);
     }
 }

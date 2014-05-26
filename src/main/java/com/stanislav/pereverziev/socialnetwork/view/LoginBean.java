@@ -23,7 +23,6 @@ import java.sql.SQLException;
 @Named("loginBean")
 @RequestScoped
 public class LoginBean implements Serializable {
-
     private String email;
     private String password;
 
@@ -68,5 +67,4 @@ public class LoginBean implements Serializable {
         }
         return null;
     }
-
 }
